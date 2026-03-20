@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moment | Screen Time, in Balance</title>
+  <meta
+    name="description"
+    content="Moment is a mindful screen-time app for Apple devices. Set limits, build healthier digital habits, and track your Screen Time Happiness. Coming April 2026."
+  />
+  <style>
+    :root {
+      --bg-cream: #fef8e3;
+      --sun-yellow: #f5e678;
+      --sun-amber: #ffb11b;
+      --ocean-1: #8be6ff;
+      --ocean-2: #5fc6f3;
+      --ocean-3: #3193da;
+      --ink: #13253a;
+      --muted: #31506a;
+      --card: rgba(255, 255, 255, 0.68);
+      --stroke: rgba(19, 37, 58, 0.12);
+      --shadow: 0 18px 40px rgba(19, 37, 58, 0.15);
+      --radius-xl: 30px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      color: var(--ink);
+      font-family: "Avenir Next", "Nunito Sans", "Segoe UI", sans-serif;
+      background: radial-gradient(1200px 600px at 10% -5%, #ffffff 0%, rgba(255, 255, 255, 0) 62%),
+        linear-gradient(170deg, var(--bg-cream) 0%, #f0fbff 48%, #e7f6ff 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1080px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 1rem 0 3rem;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--sun-yellow), #f9d54d 60%, #f0c16a 100%);
+      position: relative;
+      box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.55);
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 245, 230, 0.95);
+    }
+
+    .brand-mark::before {
+      bottom: 37%;
+    }
+
+    .brand-mark::after {
+      bottom: 23%;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.4rem;
+      margin-top: 1.25rem;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-copy {
+      padding: clamp(1.2rem, 2.2vw, 2rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #1e3a53;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(30, 58, 83, 0.1);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.03;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.9vw, 1.22rem);
+      line-height: 1.55;
+      max-width: 44ch;
+    }
+
+    .cta-row {
+      margin-top: 0.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.72rem 1.05rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(160deg, #18517f 0%, #2d77aa 90%);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(24, 81, 127, 0.3);
+    }
+
+    .button.secondary {
+      border-color: rgba(19, 37, 58, 0.2);
+      background: rgba(255, 255, 255, 0.72);
+      color: #1f4462;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 340px;
+      padding: 1.1rem;
+      background: linear-gradient(180deg, #f6fdff 0%, #c2edff 56%, #7ecff6 100%);
+      display: grid;
+      place-items: end center;
+    }
+
+    .sun {
+      width: min(62%, 270px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #fff9c6 0%, var(--sun-yellow) 48%, #ebd263 100%);
+      position: absolute;
+      top: 11%;
+      box-shadow: 0 0 45px rgba(255, 234, 120, 0.44);
+      animation: drift 7s ease-in-out infinite;
+    }
+
+    .horizon {
+      width: min(84%, 360px);
+      height: 180px;
+      position: absolute;
+      bottom: 15%;
+      border-radius: 999px 999px 999px 999px;
+      overflow: hidden;
+    }
+
+    .horizon::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.92));
+      clip-path: inset(0 0 50% 0);
+    }
+
+    .line {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 15px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .line.l1 {
+      bottom: 31%;
+    }
+
+    .line.l2 {
+      bottom: 19%;
+      left: 11%;
+      right: 11%;
+    }
+
+    .line.l3 {
+      bottom: 7%;
+      left: 14%;
+      right: 14%;
+    }
+
+    .cards {
+      margin-top: 1.4rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .card {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--stroke);
+      box-shadow: 0 8px 26px rgba(20, 43, 67, 0.1);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.04rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      line-height: 1.52;
+      font-size: 0.96rem;
+    }
+
+    .platforms {
+      margin-top: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.33rem 0.62rem;
+      border: 1px solid rgba(19, 37, 58, 0.14);
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #274867;
+    }
+
+    .footer {
+      margin-top: 1.1rem;
+      color: #31506a;
+      font-size: 0.93rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.2rem 0.2rem 0;
+    }
+
+    .footer-links {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 290px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar" aria-label="Site header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Moment Screen Time</span>
+      </div>
+      <a class="button secondary" href="mailto:hello@meaningful-things.com?subject=Moment%20Screen%20Time%20TestFlight%20Interest">
+        Contact
+      </a>
+    </header>
+
+    <section class="hero" aria-label="Coming soon overview">
+      <article class="panel hero-copy">
+        <span class="eyebrow">Coming April 2026</span>
+        <h1>Take back your focus and be in the moment.</h1>
+        <p class="sub">
+          Moment is a mindful screen-time app that helps you set limits, build healthy digital habits, and reflect on your Screen Time Happiness.
+        </p>
+        <div class="cta-row">
+          <a class="button primary" href="mailto:hello@meaningful-things.com?subject=Feature%20Request%20for%20Moment">Request Feature Info</a>
+          <a class="button secondary" href="https://meaningful-things.com/privacy" target="_blank" rel="noreferrer">Privacy First</a>
+        </div>
+      </article>
+
+      <aside class="panel hero-visual" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="horizon">
+          <div class="line l1"></div>
+          <div class="line l2"></div>
+          <div class="line l3"></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="cards" aria-label="Product highlights">
+      <article class="card">
+        <h2>Intentional Blocking</h2>
+        <p>Block distracting apps and websites with scheduled or on-demand sessions that support deep work and healthier routines.</p>
+      </article>
+      <article class="card">
+        <h2>Wellbeing Check-ins</h2>
+        <p>Track Screen Time Happiness, understand patterns, and build alternatives that feel realistic in everyday life.</p>
+      </article>
+      <article class="card">
+        <h2>Built for Apple</h2>
+        <p>Designed with Screen Time integration, widgets, live activities, accessibility support, and privacy-forward defaults.</p>
+      </article>
+    </section>
+
+    <section class="platforms" aria-label="Supported platforms">
+      <span class="pill">iPhone</span>
+      <span class="pill">iPad</span>
+      <span class="pill">Apple Watch</span>
+      <span class="pill">Mac</span>
+      <span class="pill">Apple Vision Pro</span>
+    </section>
+
+    <footer class="footer">
+      <span>Made by Meaningful Things</span>
+      <div class="footer-links">
+        <a href="mailto:hello@meaningful-things.com">hello@meaningful-things.com</a>
+        <a href="https://meaningful-things.com/privacy" target="_blank" rel="noreferrer">Privacy</a>
+        <a href="https://meaningful-things.com/terms" target="_blank" rel="noreferrer">Terms</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
