@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="images/moment-app-icon.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Moment — Screen Time, Reimagined">
+  <meta property="og:title" content="Moment — Less Scrolling, More Focus">
   <meta property="og:description" content="Reduce screen time, improve focus and live a healthy digital life. Coming April 2026.">
   <meta property="og:image" content="https://moment-screentime.app/images/og-image.png">
   <meta property="og:url" content="https://moment-screentime.app">
@@ -18,7 +18,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Moment — Screen Time, Reimagined">
+  <meta name="twitter:title" content="Moment — Less Scrolling, More Focus">
   <meta name="twitter:description" content="Reduce screen time, improve focus and live a healthy digital life. Coming April 2026.">
   <meta name="twitter:image" content="https://moment-screentime.app/images/og-image.png">
 
@@ -61,9 +61,6 @@
       --corner-radius: 30px;
       --font-primary: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
       --font-serif: 'New York', 'Iowan Old Style', Georgia, serif;
-      --ring-color-outer: rgba(252, 236, 124, 0.2);
-      --ring-color-middle: rgba(252, 236, 124, 0.5);
-      --ring-color-inner: #FCEC7C;
     }
 
     html {
@@ -99,105 +96,16 @@
 
     /* ---- Hero ---- */
     .hero {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
+      padding: 8rem 2rem 6rem;
       background: var(--color-light);
-    }
-
-    .hero-bg-top::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--color-light), rgba(242, 169, 59, 0.15));
-      pointer-events: none;
-    }
-
-    .hero-bg-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: var(--color-dark);
-    }
-
-    .hero-curve {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      transform: translateY(-15px);
-      z-index: 1;
-      line-height: 0;
-    }
-
-    .hero-curve svg {
-      display: block;
-      width: 100%;
-      height: 30px;
-    }
-
-    /* FocusRing — solid filled circles */
-    .focus-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: min(550px, 70vw);
-      height: min(550px, 70vw);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 1;
-      animation: focus-pulse 6s ease-in-out infinite;
-    }
-
-    .focus-ring-outer,
-    .focus-ring-middle,
-    .focus-ring-inner {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .focus-ring-outer {
-      inset: 0;
-      background: var(--ring-color-outer);
-    }
-
-    .focus-ring-middle {
-      inset: 13.5%;
-      background: var(--ring-color-middle);
-    }
-
-    .focus-ring-inner {
-      inset: 22.5%;
-      background: var(--ring-color-inner);
-    }
-
-    @keyframes focus-pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.03); }
     }
 
     .hero-content {
       position: relative;
-      z-index: 2;
     }
 
     .app-icon {
@@ -214,7 +122,7 @@
       font-size: clamp(3rem, 8vw, 5rem);
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-top: 1.5rem;
+      margin-top: 2.5rem;
       color: var(--text-on-light);
       opacity: 0;
       animation: hero-fade-in 1s ease-out 0.2s forwards;
@@ -384,7 +292,7 @@
     .quote {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1rem;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
       line-height: 1.6;
       max-width: 640px;
       margin: 0 auto 1rem;
@@ -395,22 +303,6 @@
       font-family: var(--font-serif);
       font-size: 1rem;
       color: var(--text-on-dark-secondary);
-      margin-bottom: 4rem;
-    }
-
-    .privacy-statement {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      color: var(--text-on-dark);
-    }
-
-    .privacy-detail {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--text-on-dark-secondary);
-      line-height: 1.6;
     }
 
     /* ---- Accessibility ---- */
@@ -468,12 +360,6 @@
       line-height: 1.7;
       color: var(--text-on-light-secondary);
       margin-bottom: 1.5rem;
-    }
-
-    .team-company {
-      font-size: 0.9rem;
-      color: var(--text-on-light-secondary);
-      font-weight: 500;
     }
 
     /* ---- Footer ---- */
@@ -566,13 +452,6 @@
         --text-on-dark: #FFB739;
         --text-on-dark-secondary: rgba(255, 183, 57, 0.8);
         --glass-bg: rgba(28, 28, 30, 0.66);
-        --ring-color-outer: rgba(255, 183, 57, 0.2);
-        --ring-color-middle: rgba(255, 183, 57, 0.5);
-        --ring-color-inner: #FFB739;
-      }
-
-      .hero-bg-top::after {
-        background: linear-gradient(to bottom, var(--color-light), rgba(1, 8, 28, 0.15));
       }
 
       .app-icon {
@@ -621,9 +500,6 @@
         transition: none;
       }
 
-      .focus-ring {
-        animation: none;
-      }
     }
   </style>
 </head>
@@ -631,18 +507,6 @@
 
   <!-- Hero -->
   <header class="hero">
-    <div class="hero-bg-top"></div>
-    <div class="hero-bg-bottom"></div>
-    <div class="hero-curve" aria-hidden="true">
-      <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-        <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-dark)"/>
-      </svg>
-    </div>
-    <div class="focus-ring" aria-hidden="true">
-      <div class="focus-ring-outer"></div>
-      <div class="focus-ring-middle"></div>
-      <div class="focus-ring-inner"></div>
-    </div>
     <div class="hero-content">
       <img src="images/moment-app-icon.png" alt="Moment app icon" class="app-icon" width="160" height="160">
       <h1 class="hero-title">Moment</h1>
@@ -650,13 +514,6 @@
       <span class="hero-badge" aria-label="Coming April 2026">Coming April 2026</span>
     </div>
   </header>
-
-  <!-- Curve: hero orange → cream -->
-  <div class="curve-separator curve-from-dark" aria-hidden="true">
-    <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-      <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-light)"/>
-    </svg>
-  </div>
 
   <main>
     <!-- Problem Statement -->
@@ -679,7 +536,7 @@
     <!-- Curve: cream → orange -->
     <div class="curve-separator curve-from-light" aria-hidden="true">
       <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-        <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-dark)"/>
+        <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-dark)"/>
       </svg>
     </div>
 
@@ -710,7 +567,7 @@
     <!-- Curve: orange → cream -->
     <div class="curve-separator curve-from-dark" aria-hidden="true">
       <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-        <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-light)"/>
+        <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-light)"/>
       </svg>
     </div>
 
@@ -731,7 +588,7 @@
     <!-- Curve: cream → orange -->
     <div class="curve-separator curve-from-light" aria-hidden="true">
       <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-        <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-dark)"/>
+        <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-dark)"/>
       </svg>
     </div>
 
@@ -742,8 +599,6 @@
           &ldquo;I don&rsquo;t want people looking at the smartphone more than they are looking into someone&rsquo;s eye.&rdquo;
         </blockquote>
         <p class="quote-attribution reveal reveal-delay-1">&ndash; Tim Cook</p>
-        <p class="privacy-statement reveal">Making great apps is our business. Selling your data is not.</p>
-        <p class="privacy-detail reveal reveal-delay-1">Your data stays on your devices and in your iCloud. We never see it.</p>
       </div>
     </section>
 
@@ -764,7 +619,7 @@
     <!-- Curve: orange → cream -->
     <div class="curve-separator curve-from-dark" aria-hidden="true">
       <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-        <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-light)"/>
+        <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-light)"/>
       </svg>
     </div>
 
@@ -774,14 +629,13 @@
         <h2 class="team-heading reveal">Made by Humans</h2>
         <p class="team-text reveal reveal-delay-1">Hi, we&rsquo;re Jan and Kerstin! We made Moment to help us take back control of our digital life and find a better balance with our devices.</p>
         <p class="team-text reveal reveal-delay-1">We hope you enjoy using Moment and find it as helpful as we do!</p>
-        <p class="team-company reveal reveal-delay-2">Meaningful Things GmbH &amp; Co. KG</p>
       </div>
     </section>
 
     <!-- Curve: cream → orange -->
     <div class="curve-separator curve-from-light" aria-hidden="true">
       <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
-        <path d="M0,0 Q720,30 1440,0 L1440,30 L0,30 Z" fill="var(--color-dark)"/>
+        <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-dark)"/>
       </svg>
     </div>
   </main>
@@ -790,7 +644,7 @@
   <footer>
     <span class="footer-badge">Coming April 2026</span>
     <div class="footer-contact">
-      <a href="mailto:hello@moment-screentime.app">hello@moment-screentime.app</a>
+      <a href="mailto:hello@meaningful-things.com">hello@meaningful-things.com</a>
     </div>
     <nav class="footer-links" aria-label="Legal">
       <a href="https://meaningful-things.com/privacy">Privacy Policy</a>
