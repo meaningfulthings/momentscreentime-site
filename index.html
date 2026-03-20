@@ -1,418 +1,747 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moment | Screen Time, in Balance</title>
-  <meta
-    name="description"
-    content="Moment is a mindful screen-time app for Apple devices. Set limits, build healthier digital habits, and track your Screen Time Happiness. Coming April 2026."
-  />
-  <style>
-    :root {
-      --bg-cream: #fef8e3;
-      --sun-yellow: #f5e678;
-      --sun-amber: #ffb11b;
-      --ocean-1: #8be6ff;
-      --ocean-2: #5fc6f3;
-      --ocean-3: #3193da;
-      --ink: #13253a;
-      --muted: #31506a;
-      --card: rgba(255, 255, 255, 0.68);
-      --stroke: rgba(19, 37, 58, 0.12);
-      --shadow: 0 18px 40px rgba(19, 37, 58, 0.15);
-      --radius-xl: 30px;
-      --radius-lg: 20px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moment — Reduce screen time, improve focus and live a healthy digital life.</title>
+  <meta name="description" content="Moment helps you set limits and build healthy habits. Available on iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro. Coming April 2026.">
+  <meta name="theme-color" content="#F5C142" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#01081C" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="images/moment-app-icon.png">
 
-    * {
+  <!-- Open Graph -->
+  <meta property="og:title" content="Moment — Screen Time, Reimagined">
+  <meta property="og:description" content="Reduce screen time, improve focus and live a healthy digital life. Coming April 2026.">
+  <meta property="og:image" content="https://moment-screentime.app/images/og-image.png">
+  <meta property="og:url" content="https://moment-screentime.app">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Moment — Screen Time, Reimagined">
+  <meta name="twitter:description" content="Reduce screen time, improve focus and live a healthy digital life. Coming April 2026.">
+  <meta name="twitter:image" content="https://moment-screentime.app/images/og-image.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Moment",
+    "operatingSystem": "iOS, macOS, watchOS, visionOS",
+    "applicationCategory": "HealthApplication",
+    "description": "Reduce screen time, improve focus and live a healthy digital life.",
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/PreOrder"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Meaningful Things GmbH & Co. KG"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      color: var(--ink);
-      font-family: "Avenir Next", "Nunito Sans", "Segoe UI", sans-serif;
-      background: radial-gradient(1200px 600px at 10% -5%, #ffffff 0%, rgba(255, 255, 255, 0) 62%),
-        linear-gradient(170deg, var(--bg-cream) 0%, #f0fbff 48%, #e7f6ff 100%);
+    :root {
+      --gradient-start: #FEF7E3;
+      --gradient-middle: #FCEC7C;
+      --gradient-end: #F2A93B;
+      --accent: #F5C142;
+      --text-primary: #1a1a1a;
+      --text-secondary: rgba(26, 26, 26, 0.66);
+      --glass-bg: rgba(255, 255, 255, 0.66);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --corner-radius: 30px;
+      --dark-bg: #01081C;
+      --dark-accent: #FFB639;
+      --font-primary: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+      --font-serif: 'New York', 'Iowan Old Style', Georgia, serif;
     }
 
-    a {
-      color: inherit;
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* FocusRing */
+    .focus-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .focus-ring-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1.5px solid rgba(242, 169, 59, 0.15);
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    .focus-ring-circle:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      border-color: rgba(242, 169, 59, 0.18);
+      animation-delay: 0s;
+    }
+    .focus-ring-circle:nth-child(2) {
+      width: 450px;
+      height: 450px;
+      border-color: rgba(242, 169, 59, 0.13);
+      animation-delay: 0.5s;
+    }
+    .focus-ring-circle:nth-child(3) {
+      width: 600px;
+      height: 600px;
+      border-color: rgba(242, 169, 59, 0.09);
+      animation-delay: 1s;
+    }
+    .focus-ring-circle:nth-child(4) {
+      width: 750px;
+      height: 750px;
+      border-color: rgba(242, 169, 59, 0.05);
+      animation-delay: 1.5s;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-icon {
+      width: 160px;
+      height: 160px;
+      border-radius: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      transform: scale(0.9);
+      animation: hero-fade-in 1s ease-out forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: hero-fade-in 1s ease-out 0.2s forwards;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 600;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 1rem auto 0;
+      line-height: 1.5;
+      opacity: 0;
+      animation: hero-fade-in 1s ease-out 0.4s forwards;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.6rem 1.6rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      opacity: 0;
+      animation: hero-fade-in 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes hero-fade-in {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ---- Sections ---- */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ---- Problem Statement ---- */
+    .problem {
+      background: linear-gradient(180deg, var(--gradient-end) 0%, var(--gradient-middle) 100%);
+    }
+
+    .problem-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--corner-radius);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 2rem 2.5rem;
+    }
+
+    .problem-card p {
+      font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    /* ---- Reveal animation ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.4s; }
+    .reveal-delay-2 { transition-delay: 0.8s; }
+
+    /* ---- Three Pillars ---- */
+    .pillars {
+      background: linear-gradient(180deg, var(--gradient-middle) 0%, var(--gradient-start) 100%);
+    }
+
+    .pillars-heading {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .pillar-card {
+      text-align: center;
+      padding: 2.5rem 2rem;
+    }
+
+    .pillar-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .pillar-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .pillar-desc {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ---- Platform Showcase ---- */
+    .platforms {
+      background: var(--gradient-start);
+      text-align: center;
+    }
+
+    .platforms-heading {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .platform-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 2rem;
+      list-style: none;
+    }
+
+    .platform-list li {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* ---- Privacy & Values ---- */
+    .privacy {
+      background: var(--dark-bg);
+      color: #fff;
+    }
+
+    .privacy .section-inner {
+      text-align: center;
+    }
+
+    .quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      line-height: 1.6;
+      max-width: 640px;
+      margin: 0 auto 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .quote-attribution {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 4rem;
+    }
+
+    .privacy-statement {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--dark-accent);
+    }
+
+    .privacy-detail {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.66);
+      line-height: 1.6;
+    }
+
+    /* ---- Accessibility ---- */
+    .accessibility {
+      background: var(--dark-bg);
+      color: #fff;
+      padding-top: 0;
+    }
+
+    .accessibility .section-inner {
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 4rem;
+    }
+
+    .accessibility-heading {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .accessibility-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      list-style: none;
+    }
+
+    .accessibility-features li {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    /* ---- Team ---- */
+    .team {
+      background: linear-gradient(180deg, var(--dark-bg) 0%, #0a1530 100%);
+      color: #fff;
+    }
+
+    .team .section-inner {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .team-heading {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .team-text {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 1.5rem;
+    }
+
+    .team-company {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 500;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      background: linear-gradient(180deg, var(--gradient-middle) 0%, var(--gradient-end) 100%);
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .footer-badge {
+      display: inline-block;
+      padding: 0.7rem 2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .footer-contact {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-contact a {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.05rem;
       text-decoration: none;
     }
 
-    .shell {
-      width: min(1080px, calc(100% - 2rem));
-      margin: 0 auto;
-      padding: 1rem 0 3rem;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.75rem 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, var(--sun-yellow), #f9d54d 60%, #f0c16a 100%);
-      position: relative;
-      box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.55);
-      overflow: hidden;
-    }
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      left: 10%;
-      right: 10%;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255, 245, 230, 0.95);
-    }
-
-    .brand-mark::before {
-      bottom: 37%;
-    }
-
-    .brand-mark::after {
-      bottom: 23%;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 1.4rem;
-      margin-top: 1.25rem;
-      align-items: stretch;
-    }
-
-    .panel {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-copy {
-      padding: clamp(1.2rem, 2.2vw, 2rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      width: fit-content;
-      border-radius: 999px;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      color: #1e3a53;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(30, 58, 83, 0.1);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      line-height: 1.03;
-      letter-spacing: -0.02em;
-      text-wrap: balance;
-    }
-
-    .sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1rem, 1.9vw, 1.22rem);
-      line-height: 1.55;
-      max-width: 44ch;
-    }
-
-    .cta-row {
-      margin-top: 0.3rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      padding: 0.72rem 1.05rem;
-      font-weight: 700;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    }
-
-    .button.primary {
-      background: linear-gradient(160deg, #18517f 0%, #2d77aa 90%);
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(24, 81, 127, 0.3);
-    }
-
-    .button.secondary {
-      border-color: rgba(19, 37, 58, 0.2);
-      background: rgba(255, 255, 255, 0.72);
-      color: #1f4462;
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
-    }
-
-    .hero-visual {
-      position: relative;
-      overflow: hidden;
-      min-height: 340px;
-      padding: 1.1rem;
-      background: linear-gradient(180deg, #f6fdff 0%, #c2edff 56%, #7ecff6 100%);
-      display: grid;
-      place-items: end center;
-    }
-
-    .sun {
-      width: min(62%, 270px);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 50% 35%, #fff9c6 0%, var(--sun-yellow) 48%, #ebd263 100%);
-      position: absolute;
-      top: 11%;
-      box-shadow: 0 0 45px rgba(255, 234, 120, 0.44);
-      animation: drift 7s ease-in-out infinite;
-    }
-
-    .horizon {
-      width: min(84%, 360px);
-      height: 180px;
-      position: absolute;
-      bottom: 15%;
-      border-radius: 999px 999px 999px 999px;
-      overflow: hidden;
-    }
-
-    .horizon::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.92));
-      clip-path: inset(0 0 50% 0);
-    }
-
-    .line {
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      height: 15px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.6);
-    }
-
-    .line.l1 {
-      bottom: 31%;
-    }
-
-    .line.l2 {
-      bottom: 19%;
-      left: 11%;
-      right: 11%;
-    }
-
-    .line.l3 {
-      bottom: 7%;
-      left: 14%;
-      right: 14%;
-    }
-
-    .cards {
-      margin-top: 1.4rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-
-    .card {
-      padding: 1rem;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.76);
-      border: 1px solid var(--stroke);
-      box-shadow: 0 8px 26px rgba(20, 43, 67, 0.1);
-    }
-
-    .card h2 {
-      margin: 0;
-      font-size: 1.04rem;
-      letter-spacing: -0.01em;
-    }
-
-    .card p {
-      margin: 0.45rem 0 0;
-      color: var(--muted);
-      line-height: 1.52;
-      font-size: 0.96rem;
-    }
-
-    .platforms {
-      margin-top: 0.85rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .pill {
-      border-radius: 999px;
-      padding: 0.33rem 0.62rem;
-      border: 1px solid rgba(19, 37, 58, 0.14);
-      background: rgba(255, 255, 255, 0.8);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #274867;
-    }
-
-    .footer {
-      margin-top: 1.1rem;
-      color: #31506a;
-      font-size: 0.93rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.2rem 0.2rem 0;
+    .footer-contact a:hover {
+      text-decoration: underline;
     }
 
     .footer-links {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
-    @keyframes drift {
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
-    @media (max-width: 900px) {
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-copyright {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 720px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .glass-card {
+        padding: 1.5rem 1.75rem;
+      }
+
+      .app-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 28px;
+      }
+
+      .focus-ring-circle:nth-child(1) { width: 200px; height: 200px; }
+      .focus-ring-circle:nth-child(2) { width: 300px; height: 300px; }
+      .focus-ring-circle:nth-child(3) { width: 400px; height: 400px; }
+      .focus-ring-circle:nth-child(4) { width: 500px; height: 500px; }
+    }
+
+    /* ---- Dark Mode ---- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f0f0f0;
+        --text-secondary: rgba(240, 240, 240, 0.66);
+        --glass-bg: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.12);
+      }
+
       .hero {
-        grid-template-columns: 1fr;
+        background: linear-gradient(180deg, #01081C 0%, #0d1a3a 50%, #1a2a50 100%);
       }
 
-      .hero-visual {
-        min-height: 290px;
+      .focus-ring-circle {
+        border-color: rgba(255, 182, 57, 0.12);
+      }
+      .focus-ring-circle:nth-child(1) { border-color: rgba(255, 182, 57, 0.18); }
+      .focus-ring-circle:nth-child(2) { border-color: rgba(255, 182, 57, 0.12); }
+      .focus-ring-circle:nth-child(3) { border-color: rgba(255, 182, 57, 0.08); }
+      .focus-ring-circle:nth-child(4) { border-color: rgba(255, 182, 57, 0.04); }
+
+      .hero-badge {
+        background: rgba(255, 182, 57, 0.15);
+        border-color: rgba(255, 182, 57, 0.25);
       }
 
-      .cards {
-        grid-template-columns: 1fr;
+      .app-icon {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+
+      .problem {
+        background: linear-gradient(180deg, #1a2a50 0%, #0d1a3a 100%);
+      }
+
+      .problem-card {
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .pillars {
+        background: linear-gradient(180deg, #0d1a3a 0%, #01081C 100%);
+      }
+
+      .platforms {
+        background: #01081C;
+      }
+
+      .privacy {
+        background: #000;
+      }
+
+      .accessibility {
+        background: #000;
+      }
+
+      .team {
+        background: linear-gradient(180deg, #000 0%, #01081C 100%);
+      }
+
+      footer {
+        background: linear-gradient(180deg, #0d1a3a 0%, #1a2a50 100%);
+      }
+
+      .footer-badge {
+        background: rgba(255, 182, 57, 0.15);
+        border-color: rgba(255, 182, 57, 0.25);
+      }
+
+      .footer-contact a {
+        color: var(--dark-accent);
       }
     }
 
+    /* ---- Reduced Motion ---- */
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
+      .app-icon,
+      .hero-title,
+      .hero-tagline,
+      .hero-badge {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .focus-ring-circle {
+        animation: none;
       }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar" aria-label="Site header">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Moment Screen Time</span>
-      </div>
-      <a class="button secondary" href="mailto:hello@meaningful-things.com?subject=Moment%20Screen%20Time%20TestFlight%20Interest">
-        Contact
-      </a>
-    </header>
 
-    <section class="hero" aria-label="Coming soon overview">
-      <article class="panel hero-copy">
-        <span class="eyebrow">Coming April 2026</span>
-        <h1>Take back your focus and be in the moment.</h1>
-        <p class="sub">
-          Moment is a mindful screen-time app that helps you set limits, build healthy digital habits, and reflect on your Screen Time Happiness.
-        </p>
-        <div class="cta-row">
-          <a class="button primary" href="mailto:hello@meaningful-things.com?subject=Feature%20Request%20for%20Moment">Request Feature Info</a>
-          <a class="button secondary" href="https://meaningful-things.com/privacy" target="_blank" rel="noreferrer">Privacy First</a>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="focus-ring" aria-hidden="true">
+      <div class="focus-ring-circle"></div>
+      <div class="focus-ring-circle"></div>
+      <div class="focus-ring-circle"></div>
+      <div class="focus-ring-circle"></div>
+    </div>
+    <div class="hero-content">
+      <img src="images/moment-app-icon.png" alt="Moment app icon" class="app-icon" width="160" height="160">
+      <h1 class="hero-title">Moment</h1>
+      <p class="hero-tagline">Reduce screen time, improve focus and live a healthy digital life.</p>
+      <span class="hero-badge" aria-label="Coming April 2026">Coming April 2026</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Problem Statement -->
+    <section class="problem">
+      <div class="section-inner">
+        <div class="problem-cards">
+          <div class="glass-card problem-card reveal">
+            <p>Our devices make everyday life easier, faster, and more connected...</p>
+          </div>
+          <div class="glass-card problem-card reveal reveal-delay-1">
+            <p>...but constant checking and endless scrolling can pull us away from what matters most.</p>
+          </div>
+          <div class="glass-card problem-card reveal reveal-delay-2">
+            <p>Moment helps you set limits and build healthy habits.</p>
+          </div>
         </div>
-      </article>
-
-      <aside class="panel hero-visual" aria-hidden="true">
-        <div class="sun"></div>
-        <div class="horizon">
-          <div class="line l1"></div>
-          <div class="line l2"></div>
-          <div class="line l3"></div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="cards" aria-label="Product highlights">
-      <article class="card">
-        <h2>Intentional Blocking</h2>
-        <p>Block distracting apps and websites with scheduled or on-demand sessions that support deep work and healthier routines.</p>
-      </article>
-      <article class="card">
-        <h2>Wellbeing Check-ins</h2>
-        <p>Track Screen Time Happiness, understand patterns, and build alternatives that feel realistic in everyday life.</p>
-      </article>
-      <article class="card">
-        <h2>Built for Apple</h2>
-        <p>Designed with Screen Time integration, widgets, live activities, accessibility support, and privacy-forward defaults.</p>
-      </article>
-    </section>
-
-    <section class="platforms" aria-label="Supported platforms">
-      <span class="pill">iPhone</span>
-      <span class="pill">iPad</span>
-      <span class="pill">Apple Watch</span>
-      <span class="pill">Mac</span>
-      <span class="pill">Apple Vision Pro</span>
-    </section>
-
-    <footer class="footer">
-      <span>Made by Meaningful Things</span>
-      <div class="footer-links">
-        <a href="mailto:hello@meaningful-things.com">hello@meaningful-things.com</a>
-        <a href="https://meaningful-things.com/privacy" target="_blank" rel="noreferrer">Privacy</a>
-        <a href="https://meaningful-things.com/terms" target="_blank" rel="noreferrer">Terms</a>
       </div>
-    </footer>
+    </section>
+
+    <!-- Three Pillars -->
+    <section class="pillars">
+      <div class="section-inner">
+        <h2 class="pillars-heading reveal">What Moment Does</h2>
+        <div class="pillars-grid">
+          <div class="glass-card pillar-card reveal">
+            <span class="pillar-icon" aria-hidden="true">&#9203;</span>
+            <h3 class="pillar-title">Block</h3>
+            <p class="pillar-desc">Set limits on apps and websites with scheduled or on-demand blockers.</p>
+          </div>
+          <div class="glass-card pillar-card reveal reveal-delay-1">
+            <span class="pillar-icon" aria-hidden="true">&#10084;&#65039;</span>
+            <h3 class="pillar-title">Reflect</h3>
+            <p class="pillar-desc">Track your mood and understand how screen time affects your wellbeing.</p>
+          </div>
+          <div class="glass-card pillar-card reveal reveal-delay-2">
+            <span class="pillar-icon" aria-hidden="true">&#128218;</span>
+            <h3 class="pillar-title">Learn</h3>
+            <p class="pillar-desc">Evidence-based tips and strategies for a healthier digital life.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Showcase -->
+    <section class="platforms">
+      <div class="section-inner">
+        <h2 class="platforms-heading reveal">On every Apple device.</h2>
+        <ul class="platform-list reveal reveal-delay-1">
+          <li>iPhone</li>
+          <li>iPad</li>
+          <li>Mac</li>
+          <li>Apple Watch</li>
+          <li>Apple Vision Pro</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Privacy & Values -->
+    <section class="privacy">
+      <div class="section-inner">
+        <blockquote class="quote reveal">
+          &ldquo;I don&rsquo;t want people looking at the smartphone more than they are looking into someone&rsquo;s eye.&rdquo;
+        </blockquote>
+        <p class="quote-attribution reveal reveal-delay-1">&ndash; Tim Cook</p>
+        <p class="privacy-statement reveal">Making great apps is our business. Selling your data is not.</p>
+        <p class="privacy-detail reveal reveal-delay-1">Your data stays on your devices and in your iCloud. We never see it.</p>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="accessibility" aria-label="Accessibility">
+      <div class="section-inner">
+        <h2 class="accessibility-heading reveal">Designed for everyone.</h2>
+        <ul class="accessibility-features reveal reveal-delay-1">
+          <li>Dynamic Type</li>
+          <li>VoiceOver</li>
+          <li>High Contrast</li>
+          <li>Reduce Motion</li>
+          <li>OpenDyslexic Font</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team">
+      <div class="section-inner">
+        <h2 class="team-heading reveal">Made by Humans</h2>
+        <p class="team-text reveal reveal-delay-1">Hi, we&rsquo;re Jan and Kerstin! We made Moment to help us take back control of our digital life and find a better balance with our devices.</p>
+        <p class="team-text reveal reveal-delay-1">We hope you enjoy using Moment and find it as helpful as we do!</p>
+        <p class="team-company reveal reveal-delay-2">Meaningful Things GmbH &amp; Co. KG</p>
+      </div>
+    </section>
   </main>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-badge">Coming April 2026</span>
+    <div class="footer-contact">
+      <a href="mailto:hello@moment-screentime.app">hello@moment-screentime.app</a>
+    </div>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="https://meaningful-things.com/privacy">Privacy Policy</a>
+      <a href="https://meaningful-things.com/terms">Terms &amp; Conditions</a>
+    </nav>
+    <p class="footer-copyright">&copy; 2026 Meaningful Things GmbH &amp; Co. KG. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
