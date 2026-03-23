@@ -100,12 +100,40 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 8rem 2rem 6rem;
+      padding: 8rem 2rem 4rem;
+      background: var(--color-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 53%;
       background: var(--color-light);
+    }
+
+    .hero-curve {
+      position: absolute;
+      top: 53%;
+      left: 0;
+      right: 0;
+      transform: translateY(-100%);
+      z-index: 1;
+      line-height: 0;
+    }
+
+    .hero-curve svg {
+      display: block;
+      width: 100%;
+      height: 30px;
     }
 
     .hero-content {
       position: relative;
+      z-index: 2;
     }
 
     .app-icon {
@@ -454,6 +482,11 @@
         --glass-bg: rgba(28, 28, 30, 0.66);
       }
 
+      .hero-badge {
+        background: rgba(255, 183, 57, 0.2);
+        color: var(--text-on-dark);
+      }
+
       .app-icon {
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
       }
@@ -464,11 +497,6 @@
 
       .accessibility-features li {
         background: rgba(255, 183, 57, 0.15);
-      }
-
-      .hero-badge {
-        background: rgba(255, 183, 57, 0.2);
-        color: var(--text-on-dark);
       }
 
       .footer-badge {
@@ -507,6 +535,12 @@
 
   <!-- Hero -->
   <header class="hero">
+    <div class="hero-bg-top"></div>
+    <div class="hero-curve" aria-hidden="true">
+      <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
+        <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-dark)"/>
+      </svg>
+    </div>
     <div class="hero-content">
       <img src="images/moment-app-icon.png" alt="Moment app icon" class="app-icon" width="160" height="160">
       <h1 class="hero-title">Moment</h1>
@@ -514,6 +548,13 @@
       <span class="hero-badge" aria-label="Coming April 2026">Coming April 2026</span>
     </div>
   </header>
+
+  <!-- Curve: hero orange → cream -->
+  <div class="curve-separator curve-from-dark" aria-hidden="true">
+    <svg viewBox="0 0 1440 30" preserveAspectRatio="none">
+      <path d="M0,30 Q720,0 1440,30 Z" fill="var(--color-light)"/>
+    </svg>
+  </div>
 
   <main>
     <!-- Problem Statement -->
