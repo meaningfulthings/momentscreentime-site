@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>User Assigned Device Name — Moment</title>
+  <link rel="apple-touch-icon" href="../images/moment-app-icon.png">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-light: #FEF7E3;
+      --color-dark: #F2A93B;
+      --text-on-light: #1a1a1a;
+      --text-on-light-secondary: rgba(26, 26, 26, 0.66);
+      --glass-bg: rgba(255, 255, 255, 0.66);
+      --corner-radius: 30px;
+      --font-primary: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-light: #FFB739;
+        --color-dark: #01081C;
+        --text-on-light: #01081C;
+        --text-on-light-secondary: rgba(1, 8, 28, 0.66);
+        --glass-bg: rgba(28, 28, 30, 0.66);
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: var(--color-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4rem 2rem;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-light);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .screenshots {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .screenshot-card {
+      background: var(--glass-bg);
+      border-radius: var(--corner-radius);
+      padding: 1.5rem;
+    }
+
+    .screenshot-card img {
+      width: 100%;
+      height: auto;
+      border-radius: calc(var(--corner-radius) - 10px);
+      display: block;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .screenshot-card {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fade-in 0.8s ease-out forwards;
+      }
+
+      .screenshot-card:nth-child(2) { animation-delay: 0.2s; }
+      .screenshot-card:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes fade-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>User Assigned Device Name</h1>
+    <div class="screenshots">
+      <div class="screenshot-card">
+        <img src="../images/Screenshot 2026-03-26 at 08.58.37.png" alt="Moment app on iPad showing All Blockers view with Work and Sport blockers active on iPhone">
+      </div>
+      <div class="screenshot-card">
+        <img src="../images/Screenshot 2026-03-26 at 08.59.32.png" alt="Moment app on iPad showing Edit Blocker view with device-specific app selection">
+      </div>
+      <div class="screenshot-card">
+        <img src="../images/Screenshot 2026-03-26 at 09.04.27.png" alt="Moment app on iPhone showing All Blockers view with a blocker active on iPad">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
