@@ -76,7 +76,8 @@
       padding: 1.5rem;
     }
 
-    .screenshot-card img {
+    .screenshot-card img,
+    .screenshot-card video {
       width: 100%;
       height: auto;
       border-radius: calc(var(--corner-radius) - 10px);
@@ -92,6 +93,7 @@
 
       .screenshot-card:nth-child(2) { animation-delay: 0.2s; }
       .screenshot-card:nth-child(3) { animation-delay: 0.4s; }
+      .screenshot-card:nth-child(4) { animation-delay: 0.6s; }
 
       @keyframes fade-in {
         to {
@@ -114,6 +116,11 @@
       </div>
       <div class="screenshot-card">
         <img src="../images/Screenshot 2026-03-26 at 09.04.27.png" alt="Moment app on iPhone showing All Blockers view with a blocker active on iPad">
+      </div>
+      <div class="screenshot-card">
+        <video controls playsinline>
+          <source src="../images/ScreenRecording_03-26-2026 11-18-00_1.mov" type="video/quicktime">
+        </video>
       </div>
     </div>
   </div>
